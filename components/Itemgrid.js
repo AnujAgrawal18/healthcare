@@ -17,7 +17,7 @@ const Itemgrid = () => {
 
   useEffect(() => {
     getitems()
-  }, [])
+  }, [location.state.name])
 
   const gotoitem = async(item)=>{
     navigate('/item', {state: {title : item.title, category: location.state.name, email : location.state.email }})
@@ -25,7 +25,6 @@ const Itemgrid = () => {
 
   return (
     <div className='bg-gradient-to-b from-orange-400 to-green-400'>
-        {console.log(location.state)}
       <NavBar details={location.state}/>
       <div className='grid grid-cols-4 w-[95%] mx-auto'>
         {
@@ -33,14 +32,14 @@ const Itemgrid = () => {
             const amount = Math.round(item.price-item.price*item.discount/100)
             return (
               <div onClick={e=>gotoitem(item)} className='w-[300px] h-[400px] bg-white p-3 text-center m-4 shadow-[0px_0px_10px_3px] shadow-black'>
-                <img src={item.img} alt="" className='w-[350px] h-[290px]' />
+                <img src={item.img} alt="" className='w-[350px] h-[280px]' />
                 <div className='text-[20px] font-bold mt-2 h-[25px] overflow-hidden'>
                   {item.title.split(' ').slice(0, 5).join(' ')}...
                 </div>
-                <div>{item.features}</div>
+                <div>{item.features.split(' ').slice(0, 3).join(' ')}</div>
                 <div className='flex items-center align-middle content-center justify-evenly mt-1'>
-                  <div className='font-bold text-[20px]'>${amount}</div>
-                  <div className='line-through font-bold text-gray-700'>${item.price}</div>
+                  <div className='font-bold text-[20px]'>&#8377;{amount}</div>
+                  <div className='line-through font-bold text-gray-700'>&#8377;{item.price}</div>
                   <div className='font-bold text-green-600'>{item.discount}% off</div>
                 </div>
               </div>

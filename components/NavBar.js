@@ -15,6 +15,10 @@ const NavBar = (props) => {
     useEffect(() => {
         getuser()
     }, [])
+
+    const itemclick = async(b)=>{
+        navigate('/Itemgrid', { state: { email: props.details.email, name: b } })
+    }
     
 
     const items = [{ title: "Groceries", img: "https://cdn-icons-png.flaticon.com/128/1261/1261163.png" }, { title: "Mobiles", img: "https://cdn-icons-png.flaticon.com/128/3930/3930510.png" }, { title: "Fashion", img: "https://cdn-icons-png.flaticon.com/128/7417/7417708.png" }, { title: "Electronics", img: "https://cdn-icons-png.flaticon.com/128/3659/3659899.png" }, { title: "Home & Furniture", img: "https://cdn-icons-png.flaticon.com/128/2603/2603741.png" }, { title: "Appliances", img: "https://cdn-icons-png.flaticon.com/128/3362/3362661.png" }, { title: "Travel", img: "https://cdn-icons-png.flaticon.com/128/15490/15490223.png" }, { title: "Beauty", img: "https://cdn-icons-png.flaticon.com/128/1940/1940993.png" }, { title: "Toys & More", img: "https://cdn-icons-png.flaticon.com/128/3082/3082060.png" }]
@@ -85,7 +89,7 @@ const NavBar = (props) => {
                     <p className='text-[14px]'>Hello {user.name}</p>
                     <p className='font-bold'>Accounts & Lists</p>
                 </div>
-                <div className='flex flex-col w-[70px] mx-3'>
+                <div className='flex flex-col w-[70px] mx-3 hover:cursor-pointer' onClick={e=>{navigate("/myorder",{ state: { email: user.email, name: user.name }})}}>
                     <p className='text-[14px]'>Returns</p>
                     <p className='font-bold'>& Orders</p>
                 </div>
@@ -98,12 +102,10 @@ const NavBar = (props) => {
                 {
                     items.map(item => {
                         return (
-                            <Link href={{ pathname: '/Itemgrid', query: { name: item.title} }}>
-                                <div className='flex flex-col justify-center items-center content-center' key={item.title}>
+                                <div className='flex flex-col justify-center items-center content-center' key={item.title} onClick={e=>itemclick(item.title)}>
                                     <img src={item.img} alt="" className='h-[60px] m-0' />
                                     <p className='p-0'>{item.title}</p>
                                 </div>
-                            </Link>
                         )
                     })
                 }

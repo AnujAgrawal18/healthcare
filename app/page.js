@@ -7,6 +7,7 @@ import YourAccount from '@/components/yourAccount'
 import Cart from '@/components/cart'
 import Itemgrid from '@/components/Itemgrid'
 import Item from '@/components/item'
+import Order from '@/components/order'
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
         <Route path='/cart' element={<Cart />} />
         <Route path='/Itemgrid' element={<Itemgrid />} />
         <Route path='/Item' element={<Item />} />
+        <Route path='/myorder' element={<Order />} />
       </Routes>
     </BrowserRouter>
     // <Cart />

@@ -34,7 +34,6 @@ const Item = () => {
                     <div className='w-[40%]'>
                         <img src={item.img} alt="" className='h-[600px] w-[700px]' />
                         <button className='p-5 bg-green-400 font-bold m-2 w-[97%]' onClick={e=>addtocart(e)}>ADD TO CART</button>
-                        <button className='p-5 bg-orange-400 font-bold m-2 w-[97%]'>BUY NOW</button>
                     </div>
                     <div className='mx-7 w-[60%]'>
                         <div className='font-bold text-[40px]'>{item.title} ({item.features})</div>
