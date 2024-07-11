@@ -8,9 +8,12 @@ import Cart from '@/components/cart'
 import Itemgrid from '@/components/Itemgrid'
 import Item from '@/components/item'
 import Order from '@/components/order'
+import Forgotpassword from '@/components/forgotpassword'
+
+
 
 export default function Home() {
-  return (
+  return (<>
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Login />} />
@@ -21,8 +24,8 @@ export default function Home() {
         <Route path='/Itemgrid' element={<Itemgrid />} />
         <Route path='/Item' element={<Item />} />
         <Route path='/myorder' element={<Order />} />
+        <Route path='/forgotpassword' element={<Forgotpassword />} />
       </Routes>
-    </BrowserRouter>
-    // <Cart />
+    </BrowserRouter></>
   )
 }

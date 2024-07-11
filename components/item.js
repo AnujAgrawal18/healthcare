@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react'
 import NavBar from '@/components/NavBar'
 import Link from 'next/link'
 import { useLocation } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Item = () => {
     const location = useLocation()
@@ -14,10 +16,9 @@ const Item = () => {
         setitem(b)
     }
     const addtocart = async(e)=>{
-        console.log(location.state)
         let a = await fetch("./api/cart", { method: "POST", body: JSON.stringify({ name: location.state.category, title: location.state.title, email: location.state.email, price: amount , img: item.img}), headers: { 'content-type': 'application/json' } })
         let b = await a.json()
-        console.log(b)
+        toast('Added to Cart', { position: "top-right", autoClose: 3000 })
     }
 
     useEffect(() => {
@@ -28,6 +29,7 @@ const Item = () => {
 
     return (
         <div className='bg-gray-600'>
+            <ToastContainer position="top-right" autoClose={3000} />
             <NavBar details={location.state}/>
             <div>
                 <div className='flex p-5 bg-white w-[95%] mx-auto my-5'>

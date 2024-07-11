@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import Link from 'next/link'
 import { useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const NavBar = (props) => {
     const [user, setuser] = useState([])
+    const ref = useRef()
     const navigate = useNavigate()
     const getuser= async()=>{
         let a = await fetch("/api/navbar", { method: "POST", body: JSON.stringify(props.details), headers: { 'content-type': 'application/json' } })
@@ -19,20 +20,21 @@ const NavBar = (props) => {
     const itemclick = async(b)=>{
         navigate('/Itemgrid', { state: { email: props.details.email, name: b } })
     }
+
+    const logout = ()=>{
+        let result = confirm("Do you want to logout from your Account");
+        if (result === true) navigate('/')   
+    }
+const search = ()=>{
+    navigate('/Itemgrid', { state: { email: props.details.email, name: ref.current.value } })
+}
     
 
     const items = [{ title: "Groceries", img: "https://cdn-icons-png.flaticon.com/128/1261/1261163.png" }, { title: "Mobiles", img: "https://cdn-icons-png.flaticon.com/128/3930/3930510.png" }, { title: "Fashion", img: "https://cdn-icons-png.flaticon.com/128/7417/7417708.png" }, { title: "Electronics", img: "https://cdn-icons-png.flaticon.com/128/3659/3659899.png" }, { title: "Home & Furniture", img: "https://cdn-icons-png.flaticon.com/128/2603/2603741.png" }, { title: "Appliances", img: "https://cdn-icons-png.flaticon.com/128/3362/3362661.png" }, { title: "Travel", img: "https://cdn-icons-png.flaticon.com/128/15490/15490223.png" }, { title: "Beauty", img: "https://cdn-icons-png.flaticon.com/128/1940/1940993.png" }, { title: "Toys & More", img: "https://cdn-icons-png.flaticon.com/128/3082/3082060.png" }]
     return (
         <div className='w-[99vw] h-auto bg-orange-950 flex flex-col'>
-            <div className='flex justify-center items-center align-middle text-white content-center h-[70px]'>
+            <div className='flex justify-between items-center align-middle text-white content-center h-[70px] mx-10'>
                 <img src="/images/name.png" alt="" className="w-[150px] h-[60px]" />
-                <div className='flex justify-center align-middle content-center items-center'>
-                    <img src="https://cdn-icons-png.flaticon.com/128/16828/16828531.png" alt="" className='invert w-[30px] h-[30px]' />
-                    <div className='flex flex-col w-[200px] mx-3'>
-                        <p className='text-[14px]'>Delivering to Delhi 110001</p>
-                        <p className='font-bold'>Change Location</p>
-                    </div>
-                </div>
                 <div className='flex text-black'>
                     <select name="" id="" className='w-[50px] h-[40px] border-r-2 border-black'>
                         <option selected="selected" value="search-alias=aps">All</option>
@@ -82,8 +84,8 @@ const NavBar = (props) => {
                         <option value="search-alias=videogames">Video Games</option>
                         <option value="search-alias=watches">Watches</option>
                     </select>
-                    <input type="Search" className='w-[580px] px-5' placeholder='Search in FashionMart' />
-                    <img src="https://cdn-icons-png.flaticon.com/128/15582/15582721.png" alt="" className='invert w-[50px] h-[40px] border-l-2 border-black bg-blue-500' />
+                    <input type="Search" className='w-[580px] px-5' placeholder='Search in FashionMart' ref={ref}/>
+                    <img src="https://cdn-icons-png.flaticon.com/128/15582/15582721.png" alt="" className='invert w-[50px] h-[40px] border-l-2 border-black bg-blue-500' type="submit" onClick={e=>{search()}}/>
                 </div>
                 <div className='flex flex-col w-[150px] mx-3 hover:cursor-pointer' onClick={e=>{navigate("/yourAccount",{ state: { email: user.email, name: user.name }})}} >
                     <p className='text-[14px]'>Hello {user.name}</p>
@@ -97,12 +99,13 @@ const NavBar = (props) => {
                     <img src="https://cdn-icons-png.flaticon.com/128/2331/2331970.png" alt="" className='w-[70px] h-[70px]' />
                     <p className='font-bold' >Cart</p>
                 </div>
+                <button className='h-[30px] px-5 bg-white text-black rounded-lg' onClick={e=>{logout()}}>LOGOUT</button>
             </div>
             <div className='flex justify-evenly h-[95px] bg-green-950 text-white font-bold text-[16px]'>
                 {
                     items.map(item => {
                         return (
-                                <div className='flex flex-col justify-center items-center content-center' key={item.title} onClick={e=>itemclick(item.title)}>
+                                <div className='flex flex-col justify-center items-center content-center hover:cursor-pointer' key={item.title} onClick={e=>itemclick(item.title)}>
                                     <img src={item.img} alt="" className='h-[60px] m-0' />
                                     <p className='p-0'>{item.title}</p>
                                 </div>

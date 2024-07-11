@@ -24,10 +24,10 @@ const Itemgrid = () => {
   }
 
   return (
-    <div className='bg-gradient-to-b from-orange-400 to-green-400'>
+    <div className='bg-gradient-to-b from-orange-400 to-green-400 min-h-screen'>
       <NavBar details={location.state}/>
       <div className='grid grid-cols-4 w-[95%] mx-auto'>
-        {
+        {(items.length!==0) &&
           items.map(item => {
             const amount = Math.round(item.price-item.price*item.discount/100)
             return (
@@ -44,6 +44,15 @@ const Itemgrid = () => {
                 </div>
               </div>
             )})}
+            {
+              (items.length===0) && 
+              <div className='w-[90vw] mt-10 p-5 bg-white mx-auto border-2 border-red-600'>
+                        <div className='font-bold text-[30px]'>No such item exists...</div>
+                        <div className='text-[20px]'>our shopping cart is waiting. Give it purpose – fill it with groceries, clothing, household supplies, electronics and more.<br/>
+                          <p className='text-red-700 font-bold'>Search using names given in navbar</p><br/>
+                            Continue shopping on the FashionMart homepage</div>
+                    </div>
+            }
       </div>
     </div>
   )

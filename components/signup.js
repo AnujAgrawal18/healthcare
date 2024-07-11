@@ -63,7 +63,7 @@ const onSubmit = async (val) => {
         <input {...register("password")} type="password" className="border-2 border-gray-500 rounded-xl w-full h-[40px] text-black px-5"/>
       </div>
       <button type="submit" className="my-5 w-full h-[40px] bg-orange-600 font-bold text-white">CREATE YOUR FASHIONMART ACCOUNT</button>
-      <div className="w-full text-wrap text-[14px]">By continuing, you agree to Amazon's Conditions of Use and Privacy Notice.</div>
+      <div className="w-full text-wrap text-[14px]">By continuing, you agree to FashionMart's Conditions of Use and Privacy Notice.</div>
         <hr className="bg-white w-full h-[2px] my-5"/>
         <div>Already have an account? <span className="text-blue-600 hover:cursor-pointer" onClick={e=>{navigate("/")}}>Sign in</span></div>
     </form>

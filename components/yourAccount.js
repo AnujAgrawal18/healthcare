@@ -11,23 +11,32 @@ const YourAccount = () => {
     const ref = useRef()
     const { register, handleSubmit, setValue } = useForm();
 
-    const getinfo=async ()=>{
-        let a = await fetch("/api/userinfo", { method: "POST", body: JSON.stringify({email: location.state.email}), headers: { 'content-type': 'application/json' } })
+    const getinfo = async () => {
+        let a = await fetch("/api/userinfo", { method: "POST", body: JSON.stringify({ email: location.state.email }), headers: { 'content-type': 'application/json' } })
         let b = await a.json();
         let obj = b[0]
-        console.log(obj)
-        setValue("phone",obj.val.phone);setValue("gender",obj.val.gender);setValue("address",obj.val.address);setValue("addtype",obj.val.addtype)
-        ;setValue("pincode",obj.val.pincode);setValue("state",obj.val.state);setValue("district",obj.val.district);setValue("accountname",obj.val.accountname);setValue("accountno",obj.val.accountno);setValue("ifsc",obj.val.ifsc);setValue("upiid",obj.val.upiid)
+        if (obj.val !== undefined) {
+            if (obj.val.phone !== undefined) setValue("phone", obj.val.phone)
+            if (obj.val.gender !== undefined) setValue("gender", obj.val.gender)
+            if (obj.val.address !== undefined) setValue("address", obj.val.address)
+            if (obj.val.addtype !== undefined) setValue("addtype", obj.val.addtype)
+            if (obj.val.pincode !== undefined) setValue("pincode", obj.val.pincode)
+            if (obj.val.state !== undefined) setValue("state", obj.val.state)
+            if (obj.val.district !== undefined) setValue("district", obj.val.district)
+            if (obj.val.accountname !== undefined) setValue("accountname", obj.val.accountname)
+            if (obj.val.accountno !== undefined) setValue("accountno", obj.val.accountno)
+            if (obj.val.ifsc !== undefined) setValue("ifsc", obj.val.ifsc)
+            if (obj.val.upiid !== undefined) setValue("upiid", obj.val.upiid)
+        }
     }
     useEffect(() => {
         getinfo()
     }, [])
 
     const onSubmit = async (val) => {
-        let a = await fetch("/api/signup", { method: "POST", body: JSON.stringify({val:val ,email: location.state.email}), headers: { 'content-type': 'application/json' } })
+        let a = await fetch("/api/signup", { method: "POST", body: JSON.stringify({ val: val, email: location.state.email }), headers: { 'content-type': 'application/json' } })
         let b = await a.json();
         toast('account details updated', { position: "top-right", autoClose: 3000 })
-        ref.current.reset()
     }
 
     return (

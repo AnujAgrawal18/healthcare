@@ -59,7 +59,7 @@ const Cart = () => {
         <div className={'min-h-screen '}>
             <ToastContainer position="top-right" autoClose={3000} />
             <NavBar details={location.state} />
-            <div className={(buy)?'bg-gradient-to-b from-orange-400 to-green-400 p-5 blur-sm':'bg-gradient-to-b from-orange-400 to-green-400 p-5'}>
+            <div className={(buy)?'bg-gradient-to-b from-orange-400 to-green-400 p-5 blur-sm h-screen':'bg-gradient-to-b from-orange-400 to-green-400 p-5 h-screen'}>
                 {(cartitems.length === 0) ?
                     <div className='w-[95%] p-5 bg-white mx-auto border-2 border-red-600'>
                         <div className='font-bold text-[30px]'>Your FashionMart Cart is Empty</div>
