@@ -34,7 +34,7 @@ const search = ()=>{
     return (
         <div className='w-[99vw] h-auto bg-orange-950 flex flex-col'>
             <div className='flex justify-between items-center align-middle text-white content-center h-[70px] mx-10'>
-                <img src="/images/name.png" alt="" className="w-[150px] h-[60px]" />
+                <img src="/images/name.png" alt="" className="w-[150px] h-[60px] hover:cursor-pointer" onClick={e=>{navigate("/home",{ state: { email: props.details.email } })}}/>
                 <div className='flex text-black'>
                     <select name="" id="" className='w-[50px] h-[40px] border-r-2 border-black'>
                         <option selected="selected" value="search-alias=aps">All</option>
