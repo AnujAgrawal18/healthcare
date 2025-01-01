@@ -5,7 +5,7 @@ const url = 'mongodb://localhost:27017';
 const client = new MongoClient(url);
 const dbName = 'FashionMartdb';
 
-export async function GET() {
+export async function POST(res) {
     await client.connect();
     const db = client.db(dbName);
     const collection = db.collection('product-blocks');

@@ -12,12 +12,12 @@ const Items = (props) => {
     const navigate = useNavigate()
 
     const getitem = async () => {
-        let a = await fetch("./api/products")
+        let a = await fetch("./api/products", { method: "POST", body: JSON.stringify({ }), headers: { 'content-type': 'application/json' } })
         let b = await a.json();
         setitem(b)
     }
     const getboxes = async () => {
-        let a = await fetch("./api/productboxes")
+        let a = await fetch("./api/productboxes", { method: "POST", body: JSON.stringify({}), headers: { 'content-type': 'application/json' } })
         let b = await a.json();
         setboxes(b)
     }
