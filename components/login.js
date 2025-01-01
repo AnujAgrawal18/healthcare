@@ -20,8 +20,8 @@ if(session){
 }
 
 const onSubmit = async (val) => {
-  if(session) return;
-  if (val.password.length === 0 ) {
+  if(!session && val===null) return;
+  else if (val.password.length === 0 ) {
     toast.error('Password field is empty', { position: "top-right", autoClose: 2000 })
   }
   else if (val.email.length === 0 ) {

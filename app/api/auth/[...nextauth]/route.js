@@ -7,7 +7,12 @@ const handler = NextAuth({
   providers: [
     GithubProvider({
       clientId: "Ov23liEp1A3LGFlf5K2F",
-      clientSecret: "b9f105d80e870e67e9ecede0b51ac8aa5fd657c1"
+      clientSecret: "b9f105d80e870e67e9ecede0b51ac8aa5fd657c1",
+      authorization: {
+        params: {
+          prompt: "login", // Forces GitHub to ask for credentials
+        },
+      },
     }),
     // ...add more providers here
   ],
