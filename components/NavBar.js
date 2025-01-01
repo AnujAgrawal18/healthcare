@@ -2,15 +2,22 @@ import React, { useRef, useState } from 'react'
 import Link from 'next/link'
 import { useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useSession, signOut } from 'next-auth/react'
+
 
 const NavBar = (props) => {
     const [user, setuser] = useState([])
     const ref = useRef()
     const navigate = useNavigate()
+    const {data: session} = useSession()
+
     const getuser= async()=>{
-        let a = await fetch("/api/navbar", { method: "POST", body: JSON.stringify(props.details), headers: { 'content-type': 'application/json' } })
+        if(session){
+            setuser(session.user)
+        }
+        else {let a = await fetch("/api/navbar", { method: "POST", body: JSON.stringify(props.details), headers: { 'content-type': 'application/json' } })
         let b = await a.json();
-        setuser(b)
+        setuser(b)}
     }
 
     useEffect(() => {
@@ -23,7 +30,13 @@ const NavBar = (props) => {
 
     const logout = ()=>{
         let result = confirm("Do you want to logout from your Account");
-        if (result === true) navigate('/')   
+        if (result === true) {
+            signOut({ redirect: false }).then(() => {
+                console.log("User signed out");
+                window.location.href = "/"; 
+              })
+              .catch((error) => console.error("Error during sign out:", error));
+        } 
     }
 const search = ()=>{
     navigate('/Itemgrid', { state: { email: props.details.email, name: ref.current.value } })

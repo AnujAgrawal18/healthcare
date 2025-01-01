@@ -20,7 +20,7 @@ const Order = () => {
   return (
     <div className={'min-h-screen '}>
         <NavBar details={location.state} />
-        <div className={'bg-gradient-to-b from-orange-400 to-green-400 p-5 h-screen'}>
+        <div className={'bg-gradient-to-b from-orange-400 to-green-400 p-5 min-h-screen'}>
                 {(orderitems.length === 0) ?
                     <div className='w-[95%] p-5 bg-white mx-auto border-2 border-red-600'>
                         <div className='font-bold text-[30px]'>No Order has been placed yet...</div>
